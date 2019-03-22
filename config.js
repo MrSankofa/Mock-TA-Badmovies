@@ -1,4 +1,4 @@
-var api_key = require('apikey.js');
+var api_key = require('./apikey.js');
 
 module.exports = {
   host: 'localhost',

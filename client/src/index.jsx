@@ -17,6 +17,31 @@ class App extends React.Component {
     // you might have to do something important here!
   }
 
+  componentDidMount() {
+    var that = this;
+    $.ajax({
+      method: "GET",
+      url: "/genres",
+      success: function success (data){
+        console.log(`success cb ran with this argument: ${JSON.stringify(data)}`);
+      }
+    }).then(function(data){
+      $.ajax({
+        method: "GET",
+        url: "/search",
+        data: "animation",
+        success: function success (data){
+          console.log(`success cb ran with this argument: ${JSON.stringify(data)}`);
+          that.setState({
+            movies: data,
+            favorites: [{deway: "favorites"}],
+            showFaves: false,
+          })
+        }
+      })
+    })
+  }
+
   getMovies() {
     // make an axios request to your server on the GET SEARCH endpoint
   }
