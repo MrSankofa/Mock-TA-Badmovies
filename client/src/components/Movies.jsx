@@ -15,9 +15,10 @@ class Movies extends React.Component {
   render() {
     return (
       <ul className="movies">
+
          {this.props.movies.map( (movie, index) => {
             return (
-              <li className="movie_item">
+              <li className="movie_item" key={index}>
                 <img src={"https://image.tmdb.org/t/p/original/"+movie.poster_path} />
                 <div className="movie_description">
                   <h6>{movie.overview}</h6>

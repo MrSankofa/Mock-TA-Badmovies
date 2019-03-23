@@ -13,7 +13,8 @@ const mongo = require('../../db/mongodb')
 // top rated `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1` 
 // https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.asc&with_genres=10752&&include_adult=false&include_video=false&page=1 
 // 02f2c194ac325057b7389b24402a11f2
-
+// latest query string: 
+// https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=vote_count.asc&include_adult=false&include_video=false&page=1&with_genres=${record.genreId}
 var getGenresFromAPI = function () {
     return axios.get(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}&language=en-US`);
 }
@@ -24,7 +25,7 @@ var getWorstMoviesbyGenre = function(targetGenre) {
     return genreIdPromise.then(function(record) {
         console.log('this is the genre id after getting it form the database: ', record.genreId);
         
-        return axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=${record.genreId}`);
+        return axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=vote_count.asc&include_adult=false&include_video=false&page=1&with_genres=${record.genreId}`);
     })
 }
 

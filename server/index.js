@@ -35,10 +35,11 @@ app.get('/genres', function(req, res) {
 
 app.get('/search', function(req, res) {
   // use this endpoint to search for movies by genres (using API key): https://api.themoviedb.org/3/discover/movie
-  console.log('this is the req.body', req.body)
-  var searchPromise = apiHelpers.getWorstMoviesbyGenre('Animation')
+  console.log('this is the req.url', req.url.slice(8))
+  var targetGenre = req.url.slice(8);
+  var searchPromise = apiHelpers.getWorstMoviesbyGenre(targetGenre)
   searchPromise.then(function(response){
-    console.log('data from getWorstMoviesByGenre ', response.data)
+    
     res.send(response.data.results)
   }).catch((err)=>console.error(err))
   // and sort them by votes (worst first) using the search parameters in themoviedb API
