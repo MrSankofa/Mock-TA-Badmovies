@@ -58,11 +58,36 @@ class App extends React.Component {
         showFaves: false
       })
     }).catch((err) => console.error(err))
-  }
+  } 
 
   saveMovie(movie) {
     // server impl
+    // if ( !this.showFaves ) {
+    //   var that = this;
+    //   axios.post('/save', movie).then((response)=>{
+    //     console.log('this is the response from /save ', response)
+    //     that.setState({
+    //       favorites: response.data
+    //     })
+    //   }).catch((err)=>console.error(err))
 
+    // } else {
+
+    //   axios.delete('/delete', {data: movie}).then((response)=>{
+    //     console.log('this is the response from /delete ', response)
+    //     that.setState({
+    //       favorites: response.data
+    //     })
+    //   }).catch((err)=>console.error(err))
+
+    // }
+
+    axios.delete('/delete', {data: movie}).then((response)=>{
+      console.log('this is the response from /delete ', response)
+      this.setState({
+        favorites: response.data
+      })
+    }).catch((err)=>console.error(err))
     // same as above but do something diff
     // client implementation
     // if ( !this.showFaves ) {

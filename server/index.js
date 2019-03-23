@@ -30,6 +30,8 @@ app.get('/genres', function(req, res) {
     res.send(response.data.genres);
     // res.send(response.data.genres);
   }).catch((err)=>console.error(err))
+
+  
   
 });
 
@@ -49,12 +51,22 @@ app.get('/search', function(req, res) {
 app.post('/save', function(req, res) {
 
   //save movie as favorite
+  
+  mongo.saveMovie(req.body)
+  mongo.getAllFavMovies().then(function(queryResults){
+    res.send(queryResults)
+  });
 
 });
 
-app.post('/delete', function(req, res) {
-
+app.delete('/delete', function(req, res) {
+console.log('this is the req.body in the delete method', req.body)
   //remove movie from favorites
+
+  mongo.deleteMovie(req.body)
+  mongo.getAllFavMovies().then(function(queryResults){
+    res.send(queryResults)
+  });
 
 });
 
