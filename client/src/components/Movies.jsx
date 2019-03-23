@@ -3,7 +3,13 @@ import React from 'react';
 class Movies extends React.Component {
   constructor(props) {
     super(props)
+    
+    this.handleMovieClick = this.handleMovieClick.bind(this)
+  }
 
+  handleMovieClick(movie) {
+    console.log('this is the movie ', movie)
+    this.props.saveMovie(movie);
   }
 
   // Make an onClick for each list item. If the movies shown is the search results, 
@@ -17,20 +23,23 @@ class Movies extends React.Component {
       <ul className="movies">
 
          {this.props.movies.map( (movie, index) => {
+           var that = this;
             return (
-              <li className="movie_item" key={index}>
+              <li  onClick={function(){that.handleMovieClick(movie)}} className="movie_item" key={index}>
                 <img src={"https://image.tmdb.org/t/p/original/"+movie.poster_path} />
+                
                 <div className="movie_description">
                   <h6>{movie.overview}</h6>
                   <section className="movie_details">
                     <div className="movie_year">
                       <span className="title">Year</span>
-                      <span>{movie.release_date}</span>
+                      <span>{movie.release_date.slice(0,4)}</span>
                     </div>
                     <div className="movie_rating">
                       <span className="title">Rating</span>
                       <span>{movie.vote_average}</span>
                     </div>
+                    {/* <button  > Favorite </button> */}
                   </section>
                 </div>
               </li>

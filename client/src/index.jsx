@@ -38,7 +38,7 @@ class App extends React.Component {
           console.log(`loaded Search API query`);
           that.setState({
             movies: data,
-            favorites: [{deway: "favorites"}],
+            favorites: [],
             showFaves: false,
           })
         }
@@ -50,17 +50,31 @@ class App extends React.Component {
     // make an axios request to your server on the GET SEARCH endpoint
     var searchPathEndPoint = '/search?' + genre;
     var that = this;
+    var curFaves = this.state.favorites;
     axios(searchPathEndPoint).then(function(response){console.log('response from getMovies in index.js ', response)
       that.setState({
         movies: response.data,
-        favorites: [{deway: "favorites"}],
+        favorites: curFaves,
         showFaves: false
       })
     }).catch((err) => console.error(err))
   }
 
-  saveMovie() {
+  saveMovie(movie) {
     // same as above but do something diff
+    // client implementation
+    // if ( !this.showFaves ) {
+    //   var curState = this.state.movies;
+    //   var newFaves = this.state.favorites;
+    //   newFaves.push(movie);
+  
+    //   this.setState({
+    //     movies: curState,
+    //     favorites: newFaves,
+    //     showFaves: false
+    //   })
+      
+    // }
   }
 
   deleteMovie() {
@@ -81,7 +95,7 @@ class App extends React.Component {
         
         <div className="main">
           <Search getMovies={this.getMovies} swapFavorites={this.swapFavorites} showFaves={this.state.showFaves}/>
-          <Movies movies={this.state.showFaves ? this.state.favorites : this.state.movies} showFaves={this.state.showFaves}/>
+          <Movies saveMovie={this.saveMovie} movies={this.state.showFaves ? this.state.favorites : this.state.movies} showFaves={this.state.showFaves}/>
         </div>
       </div>
     );
