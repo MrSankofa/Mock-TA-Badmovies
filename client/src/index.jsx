@@ -61,6 +61,8 @@ class App extends React.Component {
   }
 
   saveMovie(movie) {
+    // server impl
+
     // same as above but do something diff
     // client implementation
     // if ( !this.showFaves ) {

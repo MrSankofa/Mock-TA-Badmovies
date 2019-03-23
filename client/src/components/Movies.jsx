@@ -23,10 +23,15 @@ class Movies extends React.Component {
       <ul className="movies">
 
          {this.props.movies.map( (movie, index) => {
-           var that = this;
+           if ( movie.poster_path === null ){
+             movie.poster_path = 'https://images-na.ssl-images-amazon.com/images/I/513SU-W8JjL.jpg'
+           } else {
+            movie.poster_path = "https://image.tmdb.org/t/p/original/"+movie.poster_path
+           }
+           var that = this; 
             return (
               <li  onClick={function(){that.handleMovieClick(movie)}} className="movie_item" key={index}>
-                <img src={"https://image.tmdb.org/t/p/original/"+movie.poster_path} />
+                <img src={movie.poster_path} />
                 
                 <div className="movie_description">
                   <h6>{movie.overview}</h6>
